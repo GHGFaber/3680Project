@@ -19,10 +19,28 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
   socket.on("room_join", (data) => {
-    console.log(data);
-    socket.join(`${data}`);
-    io.to(`${data}`).emit("welcome", `welcome to ${data}`);
-    db.run(`create table ${data} (id INTEGER PRIMARY KEY)`);
+    console.log(data.code);
+    db.all(`select * from room WHERE code = '${data.code}'`, (err, rows) => {
+      if (err) throw err;
+      console.log(rows);
+      if (rows.length <= 0 && data.join == false) {
+        console.log("insert");
+        db.run(
+          `INSERT INTO room (id, code, members) VALUES(NULL, '${data.code}', '${data.name}')`
+        );
+      } else if (data.join == true && rows.length > 0) {
+        console.log("update");
+        let currMembers = rows[0].members || "";
+        let newMembers =
+          currMembers +
+          (currMembers !== null && currMembers.length > 0 ? "," : "") +
+          data.name;
+        console.log(newMembers);
+        db.run(
+          `UPDATE room SET members = '${newMembers}' WHERE code ='${data.code}'`
+        );
+      }
+    });
   });
 });
 

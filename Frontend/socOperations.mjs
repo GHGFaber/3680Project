@@ -7,13 +7,17 @@ const socket = connect("http://localhost:3000", {
 });
 
 async function socketConnect() {
-  let code = Math.random().toString(36).slice(2, 6);
+  let code;
+  do {
+    code = Math.random().toString(36).slice(2, 6);
+  } while (/^\d/.test(code));
+  let name = document.getElementById("name");
   console.log(code);
   socket.connect();
   console.log(socket.id);
   console.log("hello");
   console.log("Successfully connected!");
-  socket.emit("room_join", `${code}`);
+  socket.emit("room_join", { name: name.value, code: code, join: false });
   socket.on("welcome", (data) => {
     console.log(data);
   });
@@ -24,9 +28,10 @@ async function socketConnect() {
   } catch (error) {}
 }
 async function socketJoin() {
-  const input = document.getElementById("code");
+  const code = document.getElementById("code");
+  const name = document.getElementById("name");
   socket.connect();
-  socket.emit("room_join", `${input.value}`);
+  socket.emit("room_join", { name: name.value, code: code.value, join: true });
   socket.on("welcome", (data) => {
     console.log(data);
   });
