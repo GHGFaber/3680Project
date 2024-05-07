@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,57 +18,88 @@
         <h1 style="padding-top: 3%">User Preference</h1>
         <p>Choose a color and username you prefer.</p>
 
-
         <div style="padding-bottom: 1%">
           <button
-            class="rounded-circle"
+            class="rounded-circle color-btn"
             type="button"
-            id="button-addon2"
+            data-color="yellow"
             style="padding: 5%; background-color: yellow"
           ></button>
           <button
-            class="rounded-circle"
+            class="rounded-circle color-btn"
             type="button"
-            id="button-addon2"
+            data-color="red"
             style="padding: 5%; background-color: red"
           ></button>
         </div>
         <div style="padding-bottom: 2%">
           <button
-            class="rounded-circle"
+            class="rounded-circle color-btn"
             type="button"
-            id="button-addon2"
-            style="padding: 5%; background-color: green;"
+            data-color="green"
+            style="padding: 5%; background-color: green"
           ></button>
 
           <button
-            class="rounded-circle"
+            class="rounded-circle color-btn"
             type="button"
-            id="button-addon2"
+            data-color="blue"
             style="padding: 5%; background-color: blue"
           ></button>
         </div>
         <div class="input-group mb-3" style="width: 30%">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="nickname"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon2"
-            >
-              Enter Room
-            </button>
+          <input
+            id="nickname"
+            type="text"
+            class="form-control"
+            placeholder="nickname"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+          >
+            Enter Room
+          </button>
+        </div>
       </div>
     </center>
+
+    <script>
+      let selectedColor = null;
+
+      // function to handle color button selection
+      function selectColor(event) {
+        const colorButtons = document.querySelectorAll(".color-btn");
+
+        // reset the appearance of all buttons
+        colorButtons.forEach((btn) => {
+          btn.style.border = "none";
+          btn.style.borderWidth = "2px";
+          btn.style.borderStyle = "solid";
+          btn.style.borderColor = "transparent";
+        });
+
+        // highlight the selected button and store the selected color
+        const selectedButton = event.target;
+        selectedButton.style.borderColor = "black";
+        selectedColor = selectedButton.getAttribute("data-color");
+        console.log(`Selected color: ${selectedColor}`);
+      }
+
+      // attach event listeners to color buttons
+      const colorButtons = document.querySelectorAll(".color-btn");
+      colorButtons.forEach((btn) => {
+        btn.addEventListener("click", selectColor);
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
   </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
-  ></script>
 </html>
