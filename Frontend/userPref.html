@@ -94,6 +94,24 @@
       colorButtons.forEach((btn) => {
         btn.addEventListener("click", selectColor);
       });
+
+      // function to save preferences and redirect to waiting room
+      function savePreferences() {
+        const nickname =
+          document.getElementById("nickname").value || "Anonymous";
+        if (selectedColor) {
+          localStorage.setItem("nickname", nickname);
+          localStorage.setItem("color", selectedColor);
+          window.location.href = "waitingRoom.html";
+        } else {
+          alert("Please select a color.");
+        }
+      }
+
+      // add event listener to "Enter Room" button
+      document
+        .getElementById("button-addon2")
+        .addEventListener("click", savePreferences);
     </script>
 
     <script
