@@ -43,9 +43,24 @@
         font-size: 1.2em;
         font-weight: bold;
       }
+      .button {
+        width: 100%;
+        height: 100vh;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+      }
     </style>
   </head>
   <body>
+    <button class="btn btn-outline-primary mb-4 button" onclick="play()">
+      View Winners 🏆
+    </button>
+    <audio id="myAudio" src="happyWheelsSfx.mp3"></audio>
+
     <center>
       <div class="container" style="padding-top: 5%">
         <h1>Fadantic Trivia Winners</h1>
@@ -67,7 +82,17 @@
     </center>
 
     <script>
+      function play() {
+        const audio = document.getElementById("myAudio");
+        audio.play().catch(() => {
+          console.log("Autoplay blocked, starting audio manually.");
+        });
+        const button = document.querySelector(".button");
+        button.style.display = "none";
+      }
+
       // example scores data
+
       const participants = [
         { nickname: "El Grungo", score: 3 },
         { nickname: "TriviaMaster", score: 2 },
