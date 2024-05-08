@@ -41,6 +41,13 @@ io.on("connection", (socket) => {
         );
       }
     });
+    socket.join(`${data.code}`);
+    console.log("joined");
+  });
+  socket.on("playerInfo", (data) => {
+    console.log("hello", data);
+    console.log("code", data.code);
+    socket.to(`${data.code}`).emit("info", data);
   });
 });
 

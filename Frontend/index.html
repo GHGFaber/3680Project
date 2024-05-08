@@ -17,7 +17,7 @@
       <div>
         <h1 style="padding-top: 9%">Fadantic Trivia</h1>
         <p>Enter a code to join a trivia.</p>
-        <div class="input-group mb-3" style="width: 11%">
+        <div class="input-group mb-3" style="width: 15%">
           <input
             style="text-align: center"
             id="name"
@@ -28,7 +28,7 @@
             aria-describedby="button-addon2"
           />
         </div>
-        <div class="input-group mb-3" style="width: 11%">
+        <div class="input-group mb-3" style="width: 15%">
           <input
             style="text-align: center"
             id="code"
@@ -51,7 +51,12 @@
         <p>OR</p>
         <script type="module" src="socOperations.mjs"></script>
         <div class="input-group mb-3" style="width: 30%"></div>
-        <button onclick="socketConnect()" type="button" class="btn btn-dark">
+        <button
+          onclick="socketConnect()"
+          type="button"
+          class="btn btn-dark"
+          id="host-button"
+        >
           Host Fadantic Trivia Room
         </button>
       </div>
@@ -62,4 +67,23 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"
   ></script>
+  <script type="text/javascript">
+    let btnHost = document.getElementById("host-button");
+    btnHost.addEventListener("click", () => {
+      let name = document.getElementById("name");
+      let nameVal = name.value;
+      localStorage.setItem("name", `${nameVal}`);
+      window.location.href = "http://localhost:5500/Frontend/userPref.html";
+    });
+    let btnJoin = document.getElementById("button-addon2");
+    btnJoin.addEventListener("click", () => {
+      let name = document.getElementById("name");
+      let nameVal = name.value;
+      localStorage.setItem("name", `${nameVal}`);
+      let code = document.getElementById("code");
+      let codeVal = code.value;
+      localStorage.setItem("code", `${codeVal}`);
+      window.location.href = "http://localhost:5500/Frontend/userPref.html";
+    });
+  </script>
 </html>

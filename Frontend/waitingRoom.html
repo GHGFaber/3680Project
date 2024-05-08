@@ -9,6 +9,8 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <script type="module" src="socOperations.mjs"></script>
+
     <link rel="icon" type="image/ico" href="favicon/favicon.ico" />
     <title>Waiting Room</title>
   </head>
@@ -39,12 +41,7 @@
 
     <script>
       // dummy participant list for demonstration purposes
-      const participants = [
-        { nickname: "El Grungo", color: "yellow" },
-        { nickname: "TriviaMaster", color: "red" },
-        { nickname: "QuizWiz", color: "blue" },
-        { nickname: "SmartyPants", color: "green" },
-      ];
+      const participants = [];
 
       // function to update the participant list
       function updateParticipantList(data) {
@@ -72,7 +69,7 @@
       }
 
       // retrieve data from local storage
-      const storedNickname = localStorage.getItem("nickname");
+      const storedNickname = localStorage.getItem("name");
       const storedColor = localStorage.getItem("color");
 
       if (storedNickname && storedColor) {
